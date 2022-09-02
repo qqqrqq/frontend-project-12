@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run build --prefix frontend",
+    "build": "DISABLE_ESLINT_PLUGIN=true npm run build --prefix frontend",
     "start": "npx start-server -p 5001 -a localhost -s ./frontend/build"
   },
   "repository": {
