@@ -1,14 +1,12 @@
 {
   "name": "@hexlet/code",
   "version": "1.0.0",
-  "description": "[![Actions Status](https://github.com/qqqrqq/frontend-project-12/workflows/hexlet-check/badge.svg)](https://github.com/qqqrqq/frontend-project-12/actions)",
-  "main": "frontend/src/index.js",
-  "engines": {
-    "node": "16.14.0"
-  },
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx start-server -p 5001 -a localhost -s ./frontend/build"
+    "build": "npm run build --prefix frontend",
+    "start": "start-server -s ./frontend/build",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
