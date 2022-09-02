@@ -1,29 +1,24 @@
 {
   "name": "@hexlet/code",
-  "description": "[![Actions Status](https://github.com/Boristhblade/frontend-project-lvl4/workflows/hexlet-check/badge.svg)](https://github.com/Boristhblade/frontend-project-lvl4/actions)",
   "version": "1.0.0",
+  "description": "[![Actions Status](https://github.com/qqqrqq/frontend-project-12/workflows/hexlet-check/badge.svg)](https://github.com/qqqrqq/frontend-project-12/actions)",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "DISABLE_ESLINT_PLUGIN=true npm run build --prefix frontend",
-    "start": "DISABLE_ESLINT_PLUGIN=true start-server -s ./frontend/build",
-    "postinstall": "cd frontend && npm install"
+    "build": "npm run build --prefix frontend",
+    "start": "npx start-server -p 5001 -a localhost -s ./frontend/build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Boristhblade/frontend-project-lvl4.git"
+    "url": "git+https://github.com/qqqrqq/frontend-project-12.git"
   },
-  "keywords": [
-    "react",
-    "js"
-  ],
-  "author": "Boris the Blade",
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Boristhblade/frontend-project-lvl4/issues"
+    "url": "https://github.com/qqqrqq/frontend-project-12/issues"
   },
-  "homepage": "https://github.com/Boristhblade/frontend-project-lvl4#readme",
+  "homepage": "https://github.com/qqqrqq/frontend-project-12#readme",
   "dependencies": {
-    "@hexlet/chat-server": "^1.1.5"
+    "@hexlet/chat-server": "^1.1.6"
   }
 }
