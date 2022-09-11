@@ -22,6 +22,7 @@ const LoginForm = () => {
             password: string()
                 .required('Обязательное поле'),
         }),
+        validateOnChange: false,
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2))
         }
