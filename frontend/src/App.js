@@ -14,8 +14,8 @@ function App() {
   return (
         <Router>
           <Routes>
-            <Route exact path={'/login'} element={<MainPage />} />
-            <Route exact path={'/'} element={<LoginPage />} />
+            <Route exact path={'/'} element={<MainPage />} />
+            <Route exact path={'/login'} element={<LoginPage />} />
             <Route path={'*'} element={<FailedPage />} />
           </Routes>
         </Router>
