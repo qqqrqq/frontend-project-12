@@ -6,12 +6,15 @@ import axios from 'axios';
 import { useFormik } from 'formik'
 import { string, object } from 'yup';
 import routes from './routes.js'
+import useAuth from '../hooks/useAuth.jsx';
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
 
     const [loginError, setLoginError] = useState('');
     const path = routes.getLogin();
+    const authorization = useAuth();
+ 
     const changeLocation = useNavigate()
     const formik = useFormik({
         initialValues: {
@@ -32,6 +35,9 @@ const LoginForm = () => {
             axios.post(path, values)
                 .then(data => {
                     const userToken = data.data
+        
+                    authorization.logIn()
+
                     localStorage.setItem('userToken',JSON.stringify(userToken))
                     changeLocation('/')
                 }).catch(err => {
