@@ -11,10 +11,16 @@ const AuthProvider = ({children}) =>{
         setLogged(false)
         localStorage.removeItem('userToken')
     }
-
+    const getHeader = () =>{
+        const user = JSON.parse(localStorage.getItem('userToken'))
+        if(user){
+            return {Authorization : `Bearer ${user.token}`}
+        }
+        return {}
+    }
 
     return (
-        <AuthContext.Provider value = {{logged, logIn, logOut}}>
+        <AuthContext.Provider value = {{logged, logIn, logOut, getHeader}}>
             {children}
         </AuthContext.Provider>
     )
