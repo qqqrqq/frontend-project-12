@@ -5,7 +5,7 @@ import currentChannelReducer from './currentChanelSlice.js';
 
 export default configureStore({
     reducer:{
-        changels: channelsReducer,
+        chanels: channelsReducer,
         messages: messagesReducer,
         currentChanel: currentChannelReducer,
     }

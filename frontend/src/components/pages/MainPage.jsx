@@ -22,7 +22,7 @@ const MainPage = () => {
         }
         axios.get(chanelsPath, { headers: authorization.getHeader() }).then(response => {
             batch(() => {
-                dispatch(addChannels(response.data.channels))
+                dispatch(addChannels(response.data.chanels))
                 dispatch(addMessages(response.data.messages))
                 dispatch(setChannel({ id: response.data.currentChannelId }))
             })
