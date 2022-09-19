@@ -22,7 +22,8 @@ const MainPage = () => {
         }
         axios.get(chanelsPath, { headers: authorization.getHeader() }).then(response => {
             batch(() => {
-                dispatch(addChannels(response.data.chanels))
+   
+                dispatch(addChannels(response.data.channels))
                 dispatch(addMessages(response.data.messages))
                 dispatch(setChannel({ id: response.data.currentChannelId }))
             })
@@ -30,7 +31,7 @@ const MainPage = () => {
     }, [authorization.logged])
 
     return (
-        <div className='d-flex flex-column bg-light min-vh-100'>
+        <div className='d-flex flex-column bg-light max-vh-100 vh-100 overflow-hidden'>
             <Navbar />
             <ChatWindow/>
         </div>
