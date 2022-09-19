@@ -2,15 +2,8 @@ import { useSelector } from 'react-redux';
 import Channel from './Channel';
 
 const Chanels = () => {
- //   const channels = useSelector(state => state.channels)
-    const channels = {
-        ids: [1,2],
-        entities: {
-            1: {id:1 ,name: 'general', removable: false},
-            2: {id:2, name: 'random', removable: false}
-        }
-    }
-    
+   const channels = useSelector(state => state.channels)
+  
     return (
         <div className="col-4 col-md-2 border-end pt-5 bg-light ps-2 pe-2">
             <div className='d-flex justify-content-between mb-2 ps-3 pe-0'>
