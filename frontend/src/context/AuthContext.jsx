@@ -18,9 +18,9 @@ const AuthProvider = ({children}) =>{
         }
         return {}
     }
-
+    const username = JSON.parse(localStorage.getItem('userToken')) ?? ''
     return (
-        <AuthContext.Provider value = {{logged, logIn, logOut, getHeader}}>
+        <AuthContext.Provider value = {{logged, logIn, logOut, getHeader, username}}>
             {children}
         </AuthContext.Provider>
     )

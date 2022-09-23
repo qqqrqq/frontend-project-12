@@ -1,10 +1,10 @@
 
 
-const Message = (body, username) =>{
+const Message = ({body, username}) =>{
     
     return(
         <div className="text-break mb-2">
-            <b>{username}</b>: {body}
+            <b>{username}</b>:{` ${body}`}
         </div>
     )
 }

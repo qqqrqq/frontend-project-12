@@ -1,20 +1,30 @@
 import { Form, Button } from 'react-bootstrap';
+import { useRef } from 'react';
 import { useFormik } from 'formik';
-
+import { useSelector } from 'react-redux';
+import useAuth from '../../hooks/useAuth.jsx'
+import useAPIChat from '../../hooks/useAPIChat.jsx'
 
 const ChatForm = () => {
+    const inputRef = useRef(null)
+
+    const { username } = useAuth()
+    const { sendMessage } = useAPIChat()
+    const activeChannelId = useSelector(state => state.currentChannel.currentChannel)
     const formik = useFormik({
         initialValues: {
             body: '',
         },
-        onSubmit: (values) => {
-            console.log(`sended message ${values}`)
+        onSubmit: values => {
+            
+             sendMessage({username:username.username,activeChannelId, body: values.body})
+
         }
     })
 
     return (
         <div className='mt-auto bg-white w-100 px-5 py-3'>
-            <Form>
+            <Form onSubmit={formik.handleSubmit}>
                 <Form.Group className="py-1 border rounded-2 d-flex">
                     <Form.Control
                         name="body"
@@ -22,7 +32,8 @@ const ChatForm = () => {
                         placeholder={'Введите сообщение'}
                         className="border-0 p-0 ps-2 form-control"
                         value={formik.values.body}
-                        onChange={formik.handleChange}
+                        onChange={(formik.handleChange)}
+                        ref = {inputRef}
                     />
                     <Button type="submit" disabled={!formik.values.body} className="btn btn-group-vertical ms-1 h-100" variant="light">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="30" height="30" fill="currentColor">

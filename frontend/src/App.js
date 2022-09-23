@@ -11,20 +11,23 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import ChatContextProvider from './context/ChatContext.jsx';
 
 
-function App() {
+function App({ socket }) {
   return (
     <Provider store={store}>
-      <AuthProvider>
-        <Router>
-          <Routes>
-            <Route exact path={'/'} element={<MainPage />} />
-            <Route exact path={'/login'} element={<LoginPage />} />
-            <Route path={'*'} element={<FailedPage />} />
-          </Routes>
-        </Router>
-      </AuthProvider>
+      <ChatContextProvider socket={socket}>
+        <AuthProvider>
+          <Router>
+            <Routes>
+              <Route exact path={'/'} element={<MainPage />} />
+              <Route exact path={'/login'} element={<LoginPage />} />
+              <Route path={'*'} element={<FailedPage />} />
+            </Routes>
+          </Router>
+        </AuthProvider>
+      </ChatContextProvider>
     </Provider>
   );
 }
