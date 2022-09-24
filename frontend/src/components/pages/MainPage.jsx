@@ -20,6 +20,7 @@ const MainPage = () => {
             changeLocation('/login')
             return
         }
+        authorization.logIn()
         axios.get(chanelsPath, { headers: authorization.getHeader() }).then(response => {
             batch(() => {
                

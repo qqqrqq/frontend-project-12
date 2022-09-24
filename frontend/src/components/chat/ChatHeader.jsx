@@ -1,15 +1,16 @@
 
 
-const ChatHeader = () => {
+const ChatHeader = ({name, count}) => {
+
     return (
         <div className="bg-light p-3 shadow-sm-small">
             <p className="m-0">
                 <b>
-                    # general
+                   {`# ${name}`}
                 </b>
             </p>
             <span className="text-muted">
-                0 сообщений
+                {`${count} сообщений`}
             </span>
         </div>
     )
