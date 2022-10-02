@@ -1,8 +1,20 @@
+import { useState } from 'react';
 import { Dropdown, ButtonGroup, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { setChannel } from '../../store/currentChanelSlice';
 import DeleteChannel from '../modals/DeleteChannel';
+import RenameChannel from '../modals/RenameChannel';
 const Channel = ({ name, id, removable }) => {
+    const [renameShow, setRenameShow] = useState(false)
+    const [deleteShow, setDeleteShow] = useState(false)
+    
+        
+  const handleRenameClose = () => setRenameShow(false);
+  const handleRenameShow = () => setRenameShow(true);
+
+  const handleDeleteClose = () => setDeleteShow(false);
+  const handleDeleteShow = () => setDeleteShow(true);
+ 
 
     const activeChannel = useSelector(state => state.currentChannel.currentChannel)
 
@@ -25,14 +37,15 @@ const Channel = ({ name, id, removable }) => {
                 <span className="visually-hidden">{''}</span>
             </Dropdown.Toggle>
             <Dropdown.Menu>
-                <Dropdown.Item>
+                <Dropdown.Item onClick ={handleDeleteShow}>
                     {'Удалить'}
                 </Dropdown.Item>
-                <Dropdown.Item>
+                <Dropdown.Item onClick ={handleRenameShow}>
                     {'Переименовать'}
                 </Dropdown.Item>
             </Dropdown.Menu>
-           {<DeleteChannel/>}
+           <DeleteChannel deleteShow={deleteShow} handleDeleteClose={handleDeleteClose} handleDeleteShow={handleDeleteShow}/>
+           <RenameChannel name={name} renameShow={renameShow} handleRenameClose={handleRenameClose} handleRenameShow={handleRenameShow}/>
         </Dropdown>
     )
 

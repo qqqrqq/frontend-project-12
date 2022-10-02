@@ -2,9 +2,10 @@ import {
     Modal,Button,
 } from 'react-bootstrap';
 
-const DeleteChannel = () => {
+const DeleteChannel = (props) => {
+    const {deleteShow, handleDeleteClose, handleDeleteShow} = props
     return (
-        <Modal show centered>
+        <Modal show={deleteShow} centered>
             <Modal.Header>
                 <Modal.Title>
                     Удалить канал
@@ -12,6 +13,7 @@ const DeleteChannel = () => {
                 <Button variant="secondary"
                     className="btn-close"
                     aria-label="Close"
+                    onClick={handleDeleteClose}
                 >
                 </Button>
             </Modal.Header>
@@ -20,6 +22,7 @@ const DeleteChannel = () => {
                 <div className="d-flex justify-content-end">
                     <Button variant="secondary"
                         className="me-2"
+                        onClick={handleDeleteClose}
                     >
                         Отменить
                     </Button>
