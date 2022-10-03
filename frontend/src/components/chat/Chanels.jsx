@@ -2,14 +2,15 @@ import { useSelector } from 'react-redux';
 import Channel from './Channel';
 import AddChannel from '../modals/AddChannel';
 import { useState } from 'react';
+import { useEffect } from 'react';
 const Chanels = () => {
-   const channels = useSelector(state => state.channels)
+    const channels = useSelector(state => state.channels)
     const [show, setShow] = useState(false)
+  
 
-    
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+   
     return (
         <div className="col-4 col-md-2 border-end pt-5 bg-light ps-2 pe-2">
             <div className='d-flex justify-content-between mb-2 ps-3 pe-0'>
@@ -23,11 +24,11 @@ const Chanels = () => {
                 </button>
             </div>
             <div>
-                {channels.ids.map(id =>(
-                    <Channel key={id} id={id} name={channels.entities[id].name} removable={channels.entities[id].removable}/>
+                {channels.ids.map(id => (
+                    <Channel key={id} id={id} name={channels.entities[id].name} removable={channels.entities[id].removable} />
                 ))}
             </div>
-          <AddChannel show={show} handleClose ={handleClose}/>
+            <AddChannel show={show} handleClose={handleClose} />
         </div>
     )
 }

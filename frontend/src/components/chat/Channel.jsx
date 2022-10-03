@@ -44,8 +44,8 @@ const Channel = ({ name, id, removable }) => {
                     {'Переименовать'}
                 </Dropdown.Item>
             </Dropdown.Menu>
-           <DeleteChannel deleteShow={deleteShow} handleDeleteClose={handleDeleteClose} handleDeleteShow={handleDeleteShow}/>
-           <RenameChannel name={name} renameShow={renameShow} handleRenameClose={handleRenameClose} handleRenameShow={handleRenameShow}/>
+           <DeleteChannel deleteShow={deleteShow} id={id} handleDeleteClose={handleDeleteClose} handleDeleteShow={handleDeleteShow}/>
+           <RenameChannel name={name} renameShow={renameShow} id={id} handleRenameClose={handleRenameClose} handleRenameShow={handleRenameShow}/>
         </Dropdown>
     )
 

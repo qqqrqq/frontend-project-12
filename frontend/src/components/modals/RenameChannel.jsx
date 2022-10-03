@@ -4,15 +4,19 @@ import {
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { string, object } from 'yup';
+import useAPIChat from '../../hooks/useAPIChat.jsx';
 const RenameChannel = (props) => {
-    const {name, handleRenameClose, renameShow, handleRenameShow} = props
+    const {name, handleRenameClose, renameShow,id, handleRenameShow} = props
     const channelsNames = useSelector(state => Object.values(state.channels.entities).map(({ name }) => name))
+    const { renameChannel } = useAPIChat()
     const formik = useFormik({
         initialValues: {
-            name: name
+            name: name,
+            id,
         },
         onSubmit: (values) => {
-            console.log(values)
+           renameChannel(values)
+           handleRenameClose()
         },
         validationSchema: object().shape({
             name:
@@ -39,7 +43,7 @@ const RenameChannel = (props) => {
                 </Button>
             </Modal.Header>
             <Modal.Body>
-                <Form>
+                <Form onSubmit={formik.handleSubmit}>
                     <Form.Group>
                         <Form.Label visuallyHidden='true' htmlFor='name'>Имя канала</Form.Label>
                         <Form.Control
@@ -48,8 +52,13 @@ const RenameChannel = (props) => {
                             name='name'
                             className='mb-3'
                             value={formik.values.name}
+                            onChange={formik.handleChange}
+                            isInvalid={!!formik.errors.name}
                         >
                         </Form.Control>
+                        <Form.Control.Feedback type="invalid">
+                            {formik.errors.name}
+                        </Form.Control.Feedback>
                     </Form.Group>
                     <div className="d-flex justify-content-end">
                         <Button variant="secondary"

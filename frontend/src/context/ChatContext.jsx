@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux';
 import { addMessage } from '../store/messagesSlice.js';
 import { addChannel } from '../store/channelsSlice.js';
 import { setChannel} from '../store/currentChanelSlice.js';
-
+import { removeChannel } from '../store/channelsSlice.js';
+import { updateChannel } from '../store/channelsSlice.js';
 const ChatContext = createContext({})
 
 
@@ -18,6 +19,14 @@ const ChatContextProvider = ({socket, children}) =>{
         socket.on('newChannel', (payload) => {
             store.dispatch(addChannel(payload)) 
           });
+        socket.on('removeChannel',(payload)=>{
+            store.dispatch(removeChannel(payload))
+        })
+        socket.on('renameChannel',(payload)=>{
+            const { id, ...changes } = payload;
+            store.dispatch(updateChannel({ id, changes }))
+         
+        })
     },[socket, activeChannel])
 
     const sendMessage = (data) =>{
@@ -37,8 +46,16 @@ const ChatContextProvider = ({socket, children}) =>{
             }
         });
     }
-   
-    const value = {sendMessage , addNewChannel}
+    const deleteChannel = (data) =>{
+
+        socket.emit('removeChannel',data)
+        store.dispatch(setChannel({id: 1}))
+    }
+    const renameChannel =(data) =>{
+      
+       socket.emit('renameChannel',data)
+    }
+    const value = {sendMessage , addNewChannel,deleteChannel, renameChannel}
 
     return(
         <ChatContext.Provider value={value}>
