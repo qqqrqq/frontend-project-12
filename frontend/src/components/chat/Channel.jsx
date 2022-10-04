@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setChannel } from '../../store/currentChanelSlice';
 import DeleteChannel from '../modals/DeleteChannel';
 import RenameChannel from '../modals/RenameChannel';
+import { useTranslation } from 'react-i18next';
+
 const Channel = ({ name, id, removable }) => {
     const [renameShow, setRenameShow] = useState(false)
     const [deleteShow, setDeleteShow] = useState(false)
-    
+    const {t} = useTranslation()
         
   const handleRenameClose = () => setRenameShow(false);
   const handleRenameShow = () => setRenameShow(true);
@@ -38,10 +40,10 @@ const Channel = ({ name, id, removable }) => {
             </Dropdown.Toggle>
             <Dropdown.Menu>
                 <Dropdown.Item onClick ={handleDeleteShow}>
-                    {'Удалить'}
+                    {t('channels.delete')}
                 </Dropdown.Item>
                 <Dropdown.Item onClick ={handleRenameShow}>
-                    {'Переименовать'}
+                    {t('channels.rename')}
                 </Dropdown.Item>
             </Dropdown.Menu>
            <DeleteChannel deleteShow={deleteShow} id={id} handleDeleteClose={handleDeleteClose} handleDeleteShow={handleDeleteShow}/>

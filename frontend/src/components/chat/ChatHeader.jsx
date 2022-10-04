@@ -1,7 +1,7 @@
-
+import { useTranslation } from 'react-i18next';
 
 const ChatHeader = ({name, count}) => {
-
+    const {t} = useTranslation()
     return (
         <div className="bg-light p-3 shadow-sm-small">
             <p className="m-0">
@@ -10,7 +10,7 @@ const ChatHeader = ({name, count}) => {
                 </b>
             </p>
             <span className="text-muted">
-                {`${count} сообщений`}
+                {t('channels.count',{count})}
             </span>
         </div>
     )

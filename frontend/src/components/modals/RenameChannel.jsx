@@ -5,10 +5,13 @@ import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { string, object } from 'yup';
 import useAPIChat from '../../hooks/useAPIChat.jsx';
+import { useTranslation } from 'react-i18next';
+
 const RenameChannel = (props) => {
-    const {name, handleRenameClose, renameShow,id, handleRenameShow} = props
+    const {name, handleRenameClose, renameShow,id} = props
     const channelsNames = useSelector(state => Object.values(state.channels.entities).map(({ name }) => name))
     const { renameChannel } = useAPIChat()
+    const {t} = useTranslation()
     const formik = useFormik({
         initialValues: {
             name: name,
@@ -21,11 +24,11 @@ const RenameChannel = (props) => {
         validationSchema: object().shape({
             name:
                 string()
-                    .required('Обязательное поле')
+                    .required(t('validationform.required'))
                     .trim()
-                    .notOneOf(channelsNames, 'Должно быть уникальным')
-                    .min(3, 'Не менее 3-х символов')
-                    .max(20, 'Не более 20 символов'),
+                    .notOneOf(channelsNames, t('validationform.uniq'))
+                    .min(3, t('validationform.min3'))
+                    .max(20, t('validationform.max')),
         })
     })
 
@@ -33,7 +36,7 @@ const RenameChannel = (props) => {
         <Modal show={renameShow} centered>
             <Modal.Header>
                 <Modal.Title>
-                    Переименовать канал
+                    {t('modals.renameChannel.tittle')}
                 </Modal.Title>
                 <Button variant="secondary"
                     className="btn-close"
@@ -45,7 +48,7 @@ const RenameChannel = (props) => {
             <Modal.Body>
                 <Form onSubmit={formik.handleSubmit}>
                     <Form.Group>
-                        <Form.Label visuallyHidden='true' htmlFor='name'>Имя канала</Form.Label>
+                        <Form.Label visuallyHidden='true' htmlFor='name'>{t('modals.renameChannel.name')}</Form.Label>
                         <Form.Control
                             required
                             id='name'
@@ -65,10 +68,10 @@ const RenameChannel = (props) => {
                             className="me-2"
                             onClick={handleRenameClose}
                         >
-                            Отменить
+                           {t('modals.cancel')}
                         </Button>
                         <Button type='submit' variant="primary">
-                            Переименовать
+                            {t('modals.renameChannel.rename')}
                         </Button>
                     </div>
                 </Form>

@@ -2,7 +2,9 @@
 import Navbar from "../Navbar"
 import LoginImage from '../../images/loginpage.jpg'
 import LoginForm from "../LoginForm"
+import { useTranslation } from 'react-i18next';
 const LoginPage = () => {
+    const {t} = useTranslation()
     return (
         <>
             <div className="d-flex align-items-stretch flex-column bg-light min-vh-100">
@@ -18,9 +20,9 @@ const LoginPage = () => {
                         <div className="card-footer p-4">
                             <div className="text-center">
                                 <span className="p-1">
-                                    Нет аккаунта?
+                                   {t('loginpage.noaccount')}
                                 </span>
-                                <a href="/signup">Регистрация</a>
+                                <a href="/signup">{t('loginpage.registration')}</a>
                             </div>
                         </div>
                     </div>

@@ -5,13 +5,13 @@ import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { string, object } from 'yup';
 import useAPIChat from '../../hooks/useAPIChat';
-
+import { useTranslation } from 'react-i18next';
 
 const AddChannel = (props) => {
     const { show, handleClose } = props;
-    
+    const { t } = useTranslation()
     const channelsNames = useSelector(state => Object.values(state.channels.entities).map(({ name }) => name))
-    const {addNewChannel} = useAPIChat()
+    const { addNewChannel } = useAPIChat()
     const formik = useFormik({
         initialValues: { name: '' },
         onSubmit: (values) => {
@@ -21,18 +21,18 @@ const AddChannel = (props) => {
         validationSchema: object().shape({
             name:
                 string()
-                    .required('Обязательное поле')
+                    .required(t('validationform.required'))
                     .trim()
-                    .notOneOf(channelsNames, 'Должно быть уникальным')
-                    .min(3, 'Не менее 3-х символов')
-                    .max(20, 'Не более 20 символов'),
+                    .notOneOf(channelsNames, t('validationform.uniq'))
+                    .min(3, t('validationform.min3'))
+                    .max(20, t('validationform.max')),
         })
     })
     return (
         <Modal show={show} centered>
             <Modal.Header>
                 <Modal.Title>
-                    Добавить канал
+                    {t('modals.addChannel.tittle')}
                 </Modal.Title>
                 <Button variant="secondary"
                     className="btn-close"
@@ -45,7 +45,7 @@ const AddChannel = (props) => {
             <Modal.Body>
                 <Form onSubmit={formik.handleSubmit}>
                     <Form.Group>
-                        <Form.Label visuallyHidden='true' htmlFor='name'>Имя канала</Form.Label>
+                        <Form.Label visuallyHidden='true' htmlFor='name'>{t('modals.addChannel.name')}</Form.Label>
                         <Form.Control
                             required
                             onChange={formik.handleChange}
@@ -65,10 +65,10 @@ const AddChannel = (props) => {
                             className="me-2"
                             onClick={handleClose}
                         >
-                            Отменить
+                            {t('modals.cancel')}
                         </Button>
                         <Button type='submit' variant="primary">
-                            Добавить
+                            {t('modals.addChannel.add')}
                         </Button>
                     </div>
                 </Form>

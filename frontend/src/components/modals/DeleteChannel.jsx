@@ -2,9 +2,11 @@ import {
     Modal, Button, Form
 } from 'react-bootstrap';
 import useAPIChat from '../../hooks/useAPIChat.jsx';
+import { useTranslation } from 'react-i18next';
 
 const DeleteChannel = (props) => {
     const { deleteShow, handleDeleteClose, id, handleDeleteShow } = props
+    const {t} = useTranslation()
     const { deleteChannel } = useAPIChat()
     const handleDelete = () => {
         deleteChannel({ id })
@@ -14,7 +16,7 @@ const DeleteChannel = (props) => {
         <Modal show={deleteShow} centered>
             <Modal.Header>
                 <Modal.Title>
-                    Удалить канал
+                    {t('modals.deleteChannel.tittle')}
                 </Modal.Title>
                 <Button variant="secondary"
                     className="btn-close"
@@ -25,16 +27,16 @@ const DeleteChannel = (props) => {
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleDelete}>
-                    <span className='fs-5'>Уверены?</span>
+                    <span className='fs-5'>{t('modals.deleteChannel.sure')}</span>
                     <div className="d-flex justify-content-end">
                         <Button variant="secondary"
                             className="me-2"
                             onClick={handleDeleteClose}
                         >
-                            Отменить
+                            {t('modals.cancel')}
                         </Button>
                         <Button type='submit' variant="danger">
-                            Удалить
+                           {t('modals.deleteChannel.delete')}
                         </Button>
                     </div>
                 </Form>
