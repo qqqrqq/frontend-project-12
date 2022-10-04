@@ -6,19 +6,21 @@ import { useSelector } from 'react-redux';
 import { string, object } from 'yup';
 import useAPIChat from '../../hooks/useAPIChat.jsx';
 import { useTranslation } from 'react-i18next';
-
+import { toast } from 'react-toastify';
 const RenameChannel = (props) => {
     const {name, handleRenameClose, renameShow,id} = props
     const channelsNames = useSelector(state => Object.values(state.channels.entities).map(({ name }) => name))
     const { renameChannel } = useAPIChat()
     const {t} = useTranslation()
+    const notifySuccess = () => toast.success(t('notify.successRename'));
+    const notifyError = () => toast.success(t('notify.errorRename'));
     const formik = useFormik({
         initialValues: {
             name: name,
             id,
         },
         onSubmit: (values) => {
-           renameChannel(values)
+           renameChannel(values, notifySuccess, notifyError)
            handleRenameClose()
         },
         validationSchema: object().shape({

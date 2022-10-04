@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../Navbar';
 import axios from 'axios';
+import { ToastContainer } from 'react-toastify';
 import { useDispatch, batch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import useAuth from '../../hooks/useAuth.jsx';
@@ -35,6 +36,7 @@ const MainPage = () => {
         <div className='d-flex flex-column bg-light max-vh-100 vh-100 overflow-hidden'>
             <Navbar />
             <ChatWindow/>
+            <ToastContainer />
         </div>
 
     )

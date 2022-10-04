@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 import './index.css';
 import 'bootstrap';
 import init from './init.jsx';
-
+import 'react-toastify/dist/ReactToastify.css';
 
 const app = async () =>{
   

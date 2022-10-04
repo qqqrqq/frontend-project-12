@@ -13,6 +13,7 @@ const ChatContextProvider = ({socket, children}) =>{
     const activeChannel = useSelector(state => state.currentChannel.currentChannel)
    
     useEffect(()=>{
+  
         socket.on('newMessage', (payload) =>{
             store.dispatch(addMessage(payload))
         })
@@ -20,7 +21,10 @@ const ChatContextProvider = ({socket, children}) =>{
             store.dispatch(addChannel(payload)) 
           });
         socket.on('removeChannel',(payload)=>{
-            store.dispatch(removeChannel(payload))
+            store.dispatch(removeChannel(payload.id))
+            if(payload.id === activeChannel){
+                store.dispatch(setChannel({id: 1}))
+            }
         })
         socket.on('renameChannel',(payload)=>{
             const { id, ...changes } = payload;
@@ -38,22 +42,37 @@ const ChatContextProvider = ({socket, children}) =>{
         })
     }
 
-    const addNewChannel = (data) =>{
+    const addNewChannel = (data, notifySuccess, notifyError) =>{
         socket.emit('newChannel', data, (resp)=>{
             if(resp.status === 'ok'){
                 store.dispatch(addChannel(resp.data))
                 store.dispatch(setChannel({id: resp.data.id}))
+                notifySuccess();
+            }else{
+                notifyError()
             }
         });
     }
-    const deleteChannel = (data) =>{
+    const deleteChannel = (data,notifySuccess,notifyError) =>{
 
-        socket.emit('removeChannel',data)
-        store.dispatch(setChannel({id: 1}))
+        socket.emit('removeChannel',data, (({status})=>{
+            if(status ==='ok'){
+                notifySuccess()
+            }else{
+                notifyError()
+            }
+        }))
+       
     }
-    const renameChannel =(data) =>{
+    const renameChannel =(data, notifySuccess, notifyError) =>{
       
-       socket.emit('renameChannel',data)
+       socket.emit('renameChannel',data,(({status})=>{
+            if(status === 'ok'){
+                notifySuccess()
+            }else{
+                notifyError()
+            }
+       }))
     }
     const value = {sendMessage , addNewChannel,deleteChannel, renameChannel}
 

@@ -1,15 +1,20 @@
 import {
     Modal, Button, Form
 } from 'react-bootstrap';
+import React from 'react';
 import useAPIChat from '../../hooks/useAPIChat.jsx';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 
 const DeleteChannel = (props) => {
-    const { deleteShow, handleDeleteClose, id, handleDeleteShow } = props
+    const { deleteShow, handleDeleteClose, id } = props
     const {t} = useTranslation()
     const { deleteChannel } = useAPIChat()
-    const handleDelete = () => {
-        deleteChannel({ id })
+    const notifySuccess = () => toast.success(t('notify.successDelete'));
+    const notifyError = () => toast.success(t('notify.errorDelete'));
+    const handleDelete = (e) => {
+        e.preventDefault()
+        deleteChannel({ id },notifySuccess, notifyError)
         handleDeleteClose()
     }
     return (

@@ -6,6 +6,14 @@ const ru = {
             noaccount: 'Нету аккаунта?',
             registration: 'Регистрация',
         },
+        notify:{
+            successAdd: 'Канал успешно создан',
+            errorAdd: 'Ошибка при создании канала',
+            successDelete: 'Канал успешно удален',
+            errorDelete: 'Ошибка при удалении канала',
+            successRename: 'Канал успешно переименован',
+            errorRename: 'Ошибка при переименовании канала',
+        },
         channels: {
             tittle: 'Каналы',
             rename: 'Переименовать',
