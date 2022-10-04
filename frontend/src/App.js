@@ -11,6 +11,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import SignupPage from './components/pages/SignupPage';
 import ChatContextProvider from './context/ChatContext.jsx';
 
 
@@ -23,6 +24,7 @@ function App({ socket }) {
             <Routes>
               <Route exact path={'/'} element={<MainPage />} />
               <Route exact path={'/login'} element={<LoginPage />} />
+              <Route exact path={'/signup'} element={<SignupPage />} />
               <Route path={'*'} element={<FailedPage />} />
             </Routes>
           </Router>

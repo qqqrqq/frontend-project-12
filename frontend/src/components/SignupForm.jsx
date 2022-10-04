@@ -4,15 +4,15 @@ import {
 } from 'react-bootstrap';
 import axios from 'axios';
 import { useFormik } from 'formik'
-import { string, object } from 'yup';
+import { string, object, ref } from 'yup';
 import routes from './routes.js'
 import useAuth from '../hooks/useAuth.jsx';
 import { useNavigate } from "react-router-dom";
 
-const LoginForm = () => {
+const SignupForm = () => {
 
     const [loginError, setLoginError] = useState('');
-    const path = routes.getLogin();
+    const path = routes.signup();
     const authorization = useAuth();
  
     const changeLocation = useNavigate()
@@ -20,6 +20,7 @@ const LoginForm = () => {
         initialValues: {
             username: '',
             password: '',
+            comfirm: ''
         },
         validationSchema: object().shape({
             username: string()
@@ -27,11 +28,15 @@ const LoginForm = () => {
                 .min(3, 'Не менее 3-х символов')
                 .max(20, 'Не более 20 символов'),
             password: string()
-                .required('Обязательное поле'),
+                .required('Обязательное поле')
+                .min(6, ('Не менее 6-х символов')),
+            confirm: string()
+                .oneOf([ref('password'),null], 'Пароли должны совпадать')
         }),
         validateOnChange: false,
         onSubmit: values => {
-            axios.post(path, values)
+            const userData = { username: values.username, password: values.password}
+            axios.post(path, userData)
                 .then(data => {
                     const userToken = data.data
         
@@ -40,7 +45,7 @@ const LoginForm = () => {
                     localStorage.setItem('userToken',JSON.stringify(userToken))
                     changeLocation('/')
                 }).catch(err => {
-                    setLoginError('Неверное имя пользователя или пароль')
+                    setLoginError('Пользователь с таким именем уже существует')
                 })
           
         }
@@ -48,10 +53,10 @@ const LoginForm = () => {
     return (
         <>
             <Form className="col-12 col-md-6 mt-3 mt-mb-0 p-3" onSubmit={formik.handleSubmit}>
-                <h1 className='text-center p-2'>Войти</h1>
+                <h1 className='text-center p-2'>Регистрация</h1>
                 <Form.Group className="form-floating mb-3" controlId='username'>
                     <Form.Control type="username" isInvalid={!!formik.errors.username || !!loginError} onChange={formik.handleChange} value={formik.values.name} placeholder="Ваш ник" />
-                    <Form.Label className="form-label">Ваш ник</Form.Label>
+                    <Form.Label className="form-label">Имя пользователя</Form.Label>
                     <Form.Control.Feedback type="invalid">
                         {loginError || formik.errors.username}
                     </Form.Control.Feedback>
@@ -63,9 +68,16 @@ const LoginForm = () => {
                         {formik.errors.password}
                     </Form.Control.Feedback>
                 </Form.Group>
+                <Form.Group className="form-floating mb-3" controlId='confirm'>
+                    <Form.Control isInvalid={!!formik.errors.confirm || !!loginError} onChange={formik.handleChange} value={formik.values.confirm} type="password" placeholder="Пароль" />
+                    <Form.Label className="form-label">Подтвердите пароль</Form.Label>
+                    <Form.Control.Feedback type="invalid">
+                        {formik.errors.confirm}
+                    </Form.Control.Feedback>
+                </Form.Group>
                 <div className="d-grid gap-2">
                     <Button variant="outline-primary" type="submit">
-                        Войти
+                        Зарегистрироваться
                     </Button>
                 </div>
 
@@ -74,4 +86,4 @@ const LoginForm = () => {
     )
 }
 
-export default LoginForm
+export default SignupForm
