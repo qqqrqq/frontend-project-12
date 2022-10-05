@@ -1,15 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import io from 'socket.io-client';
-import './index.css';
-import 'bootstrap';
-import init from './init.jsx';
-import 'react-toastify/dist/ReactToastify.css';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import io from "socket.io-client";
+import "./index.css";
+import "bootstrap";
+import init from "./init.jsx";
+import "react-toastify/dist/ReactToastify.css";
 
 const app = async () =>{
   
   const socket = io()
-  const root = ReactDOM.createRoot(document.getElementById('root'));
+  const root = ReactDOM.createRoot(document.getElementById("root"));
   const initApp = await init(socket)
   root.render(
     <React.StrictMode>
