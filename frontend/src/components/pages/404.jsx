@@ -1,3 +1,4 @@
+import React from 'react';
 import Navbar from "../Navbar"
 import { Link } from 'react-router-dom';
 import failedImage from '../../images/404.png';

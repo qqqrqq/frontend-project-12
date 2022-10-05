@@ -1,3 +1,4 @@
+import React from 'react';
 import Navbar from "../Navbar"
 import SignupImage from '../../images/signup.jpg'
 import SignupForm from "../SignupForm"

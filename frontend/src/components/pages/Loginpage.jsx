@@ -1,4 +1,4 @@
-
+import React from 'react';
 import Navbar from "../Navbar"
 import LoginImage from '../../images/loginpage.jpg'
 import LoginForm from "../LoginForm"

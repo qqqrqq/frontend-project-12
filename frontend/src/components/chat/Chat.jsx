@@ -1,3 +1,4 @@
+import React from 'react';
 import ChatForm from "./ChatForm"
 import Message from "./Message"
 import { useSelector } from 'react-redux';

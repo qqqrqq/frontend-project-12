@@ -1,3 +1,4 @@
+import React from 'react';
 import App from './App.js';
 import { createInstance } from 'i18next';
 import { initReactI18next, I18nextProvider } from 'react-i18next';
