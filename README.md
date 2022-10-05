@@ -7,3 +7,9 @@
 Чат (Slack) - Real-time приложение (аналог Slack-чата) на React/Redux
 
 Открыть приложение : https://slack-ch.herokuapp.com/
+
+Залогиниться можно с пользователя admin:  логин - admin, пароль -admin
+
+Или зарегистрировать нового, на странице регистрации
+
+Бекенд - [Hexlet chat backend](https://github.com/hexlet-components/project-js-chat-backend)
