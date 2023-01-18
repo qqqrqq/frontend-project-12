@@ -6,7 +6,7 @@
 
 Чат (Slack) - Real-time приложение (аналог Slack-чата) на React/Redux
 
-Открыть приложение : https://slack-ch.herokuapp.com/
+Открыть приложение : https://frontend-project-12-production-030e.up.railway.app
 
 Залогиниться можно с пользователя admin:  логин - admin, пароль -admin
 
